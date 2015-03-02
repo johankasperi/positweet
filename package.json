@@ -1,0 +1,26 @@
+{
+  "name": "the-box",
+  "version": "1.0.0",
+  "description": "Repo for project 1 in INFO490 at UIUC. Created by Johan Kasperi, Holly Brown and Aileen Bai.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.12.1",
+    "passport": "^0.2.1",
+    "passport-twitter": "^1.0.2",
+    "twit": "^1.1.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johankasperi/the-box.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johankasperi/the-box/issues"
+  },
+  "homepage": "https://github.com/johankasperi/the-box"
+}
