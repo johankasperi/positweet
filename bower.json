@@ -1,0 +1,30 @@
+{
+  "name": "the-box",
+  "version": "0.0.1",
+  "homepage": "https://github.com/johankasperi/the-box",
+  "authors": [
+    "Johan Kasperi <johan@kasperi.se>"
+  ],
+  "description": "Project 1 for INFO490 at UIUC",
+  "main": "app.js",
+  "keywords": [
+    "node",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "web/bower_components/"
+  ],
+  "dependencies": {
+    "angularjs": "~1.3.14",
+    "bootstrap": "~3.3.2",
+    "angular-route": "~1.3.14",
+    "jquery": "~2.1.3",
+    "normalize.css": "~3.0.2"
+  }
+}

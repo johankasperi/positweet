@@ -1,0 +1,39 @@
+<div class="col-lg-12" ng-show="loginCtrl.isLoading">
+	<div class="progress">
+	  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	  	{{loginCtrl.currentTask}}
+	  </div>
+	</div>
+</div>
+<div class="col-lg-6">
+	<form class="form-signin">
+	  <h2 class="form-signin-heading">Sign in</h2>
+	  <div class="alert alert-warning alert-dismissible" role="alert" ng-show="loginCtrl.loginError != ''">
+		  <button ng-click="loginCtrl.resetError('login')" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></strong> {{loginCtrl.loginError}}
+		</div>
+	  <label class="sr-only">Email address</label>
+	  <input ng-model="loginUser.email" class="form-control" placeholder="Email address" autofocus="">
+	  <label class="sr-only">Password</label>
+	  <input type="password" ng-model="loginUser.password" class="form-control" placeholder="Password">
+	  <button class="btn btn-lg btn-primary btn-block" ng-click="loginCtrl.login(loginUser)">Sign in</button>
+	</form>
+</div>
+<div class="col-lg-6">
+	<form class="form-signin">
+	  <h2 class="form-signin-heading">Register</h2>
+	  <div class="alert alert-warning alert-dismissible" role="alert" ng-show="loginCtrl.registerError != ''">
+		  <button ng-click="loginCtrl.resetError('register')" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></strong> {{loginCtrl.registerError}}
+		</div>
+	  <label for="inputEmail" class="sr-only">Email address</label>
+	  <input ng-model="registerUser.email" class="form-control" placeholder="Email address" autofocus="">
+	  <label class="sr-only">Username</label>
+	  <input ng-model="registerUser.username" class="form-control" placeholder="Username"  autofocus="">
+	  <label class="sr-only">Password</label>
+	  <input type="password" ng-model="registerUser.password" class="form-control" placeholder="Password">
+	  <button class="btn btn-lg btn-primary btn-block" ng-click="loginCtrl.registerNewUser(registerUser)">Register</button>
+	</form>
+</div>
+<div id="firebaseUid" style="display:none;"></div>
+<div id="firebaseAuthToken" style="display: none;"></div>

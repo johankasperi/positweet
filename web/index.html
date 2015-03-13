@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>The box</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
+
+  <script src="bower_components/angularjs/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/controllers/MainCtrl.js"></script>
+  <script src="js/services/restService.js"></script>
+</head>
+
+<body ng-app="theBox">
+  <main class="main-body" ng-controller="MainCtrl as mainCtrl">
+    <h1 style="text-align: center;">
+      <div class="cool-text">The box</div>
+    </h1>
+    <div ng-show="mainCtrl.getLoggedIn()">
+    </div>
+    <div ng-view></div>
+  </main>
+</body>
+</html>
