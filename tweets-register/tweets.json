@@ -1,0 +1,40 @@
+{
+	"register": [
+		{
+			"name": "red",
+			"color": {
+				"r": 255,
+				"g": 0,
+				"b": 0
+			},
+			"tweets": [
+				"#receiver# is the best person in the world!",
+				"I just love #receiver#"
+			]
+		},
+		{
+			"name": "blue",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 255
+			},
+			"tweets": [
+				"#receiver# makes me happy",
+				"#receiver# is the best person I know"
+			]
+		},
+		{
+			"name": "green",
+			"color": {
+				"r": 0,
+				"g": 255,
+				"b": 0
+			},
+			"tweets": [
+				"#receiver# are wonderful",
+				"#receiver# is sweet"
+			]
+		}
+	]
+}

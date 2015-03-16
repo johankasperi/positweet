@@ -1,29 +1,19 @@
 (function() {
 	'use strict';
-	var MainCtrl = function($location, restService) {
-		this.location = $location;
-		this.restService = restService;
-		this.user = {};
-		this.loggedIn = false;
+	var MainCtrl = function(userService) {
+		this.userService = userService;
 		this.init();
+		this.user = {};
 	};
 
 	MainCtrl.prototype.init = function() {
 		console.log("main init");
-		this.getUser();
-	}
-
-	MainCtrl.prototype.getUser = function() {
-		this.restService.getUser(function(user) {
-			if(user) {
-				this.user = user;
-				this.loggedIn = true;
-			}
+		var self = this;
+		self.userService.loadUser(function() {
+			self.user = self.userService.getUser();
+			console.log(self.user)
 		});
-	}
-
-	MainCtrl.prototype.getLoggedIn = function() {
-		return this.loggedIn;
+		self.userService.loadFriends(function() {});
 	}
 
 	theBox.controller('MainCtrl', MainCtrl);

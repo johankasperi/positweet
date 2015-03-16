@@ -6,26 +6,61 @@
   <title>The box</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/colorpicker.min.css">
   <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
 
   <script src="bower_components/angularjs/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/controllers/MainCtrl.js"></script>
+  <script src="js/controllers/StartCtrl.js"></script>
+  <script src="js/controllers/ReceiverCtrl.js"></script>
+
+  <script src="js/services/userService.js"></script>
   <script src="js/services/restService.js"></script>
+  <script src="js/services/socketService.js"></script>
+
+  <script src="js/modules/bootstrap-colorpicker-module.min.js"></script>
 </head>
 
 <body ng-app="theBox">
-  <main class="main-body" ng-controller="MainCtrl as mainCtrl">
-    <h1 style="text-align: center;">
-      <div class="cool-text">The box</div>
-    </h1>
-    <div ng-show="mainCtrl.getLoggedIn()">
-    </div>
+ <div ng-controller="MainCtrl as mainCtrl">
+  <header>
+    <nav id="navigation" role="navigation" class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+       <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">The box</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/#/">Start <span class="sr-only">(current)</span></a></li>
+            <li><a href="/#/set-receiver">Set receiver</a></li>
+            <li><a href="/logout" title="Logout">Logout</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li>
+                <span class="navbar-text">{{ '@' + mainCtrl.user.username }}</span>
+                <img ng-src="{{ mainCtrl.user._json.profile_image_url }}" alt="user profile" class="img-circle"/>
+              </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
+  <main class="main-body">
     <div ng-view></div>
   </main>
+</div>
 </body>
 </html>
