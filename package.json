@@ -4,9 +4,10 @@
   "description": "Repo for project 1 in INFO490 at UIUC. Created by Johan Kasperi, Holly Brown and Aileen Bai.",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.12.1",
+    "express": "^4.12.2",
+    "galileo-io": "^0.8.1",
     "passport": "^0.2.1",
-    "passport-twitter": "^1.0.2",
+    "passport-twitter": "^1.0.3",
     "twit": "^1.1.20"
   },
   "devDependencies": {},

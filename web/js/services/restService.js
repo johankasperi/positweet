@@ -43,7 +43,7 @@
   }
 
   restService.prototype.findTweet = function(r,g,b) {
-    this.http.post('/api/tweet/find', { red: r, green: g, blue: b })
+    this.http.get('/api/tweet/find?red='+r+'&green='+g+'&blue='+b)
     .error(function(data, status, headers, config) {
     })
     .success(function(data, status, headers, config) {

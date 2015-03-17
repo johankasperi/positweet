@@ -25,9 +25,5 @@
 		this.receiver = screenName;
 	}
 
-	ReceiverCtrl.prototype.friendsRange = function() {
-		return Math.ceil(this.friends/3);
-	}
-
 	theBox.controller('ReceiverCtrl', ReceiverCtrl);
 }());

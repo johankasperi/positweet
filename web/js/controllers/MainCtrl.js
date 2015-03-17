@@ -11,7 +11,6 @@
 		var self = this;
 		self.userService.loadUser(function() {
 			self.user = self.userService.getUser();
-			console.log(self.user)
 		});
 		self.userService.loadFriends(function() {});
 	}

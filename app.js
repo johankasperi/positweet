@@ -6,6 +6,7 @@ bodyParser = require('body-parser'),
 socketio = require('socket.io'),
 _ = require('underscore'),
 fs = require('fs'),
+mraa = require('mraa'),
 TwitterStrategy = require('passport-twitter').Strategy;
 
 // App
@@ -32,8 +33,9 @@ var T;
 var user;
 var friends = {};
 var receiver = "johannahilding";
-var lastTweet = "";
-var currentTweet = ""
+var lastTweet = ""; // last sended tweet
+var currentTweet = ""; // current random tweet message
+var currentColor = ""; // current color
 
 var twitterKeys = {
   consumerKey: "zQl5puCnLLXb6FQPYhcs6FT4a",
@@ -46,7 +48,7 @@ var twitterKeys = {
 passport.use(new TwitterStrategy({
     consumerKey: twitterKeys.consumerKey,
     consumerSecret: twitterKeys.consumerSecret,
-    callbackURL: "http://localhost:2222/auth/twitter/callback"
+    callbackURL: "http://192.168.10.104:2222/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
     twitterKeys.accessToken = token;
@@ -83,7 +85,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedi
 
 app.get('/login', function(req, res) {
   // Static file for login
-  res.sendfile("login.html", { root: __dirname + "/web" })
+  res.sendFile("login.html", { root: __dirname + "/web" })
 })
 
 app.get('/logout', function(req, res){
@@ -93,7 +95,7 @@ app.get('/logout', function(req, res){
 
 // Static content
 app.all("/", ensureAuthenticated, function(req, res) {
-  res.sendfile("index.html", { root: __dirname + "/web" });
+  res.sendFile("index.html", { root: __dirname + "/web" });
 });
 
 // Rest api
@@ -135,12 +137,20 @@ app.get("/api/receiver", function(req, res) {
   res.send({ receiver: receiver });
 })
 
-app.post("/api/tweet/find", function(req, res) {
-  var r = parseInt(req.body.red);
-  var g = parseInt(req.body.green);
-  var b = parseInt(req.body.blue);
-  findAndPrepareTweet(r,g,b, function(tweet) {
-    currentTweet = tweet;
+app.get("/api/tweet/find", function(req, res) {
+  var r = parseInt(req.query.red);
+  var g = parseInt(req.query.green);
+  var b = parseInt(req.query.blue);
+  var clear = parseInt(req.query.clear);
+  if(clear < 700) {
+    setRgbColor(0,0,0);
+    res.status(200);
+    res.send()
+    return null;
+  }
+
+  setRgbColor(r,g,b);
+  findAndPrepareTweet(r,g,b, function() {
     res.status(200);
     res.send()
   })
@@ -177,8 +187,6 @@ fs.readFile('tweets-register/tweets.json', function(err, data) {
 })
 
 function findAndPrepareTweet(r, g, b, callback) {
-  var foundColor = {};
-  var bestScore = 0;
   var foundColor = _.max(tweets.register, function(item) {
       return item.color.r*r + item.color.g*g + item.color.b*b;
   })
@@ -187,14 +195,22 @@ function findAndPrepareTweet(r, g, b, callback) {
     return callback(null);
   }
   tweet = tweet.replace("#receiver#", "@"+receiver) + " #INFO490 #UIUC";
+
+  // Do not change tweet all the time
+  if(currentColor.color === foundColor.color) {
+    return callback();
+  }
+
+  currentTweet = tweet;
+  currentColor = foundColor;
   io.emit("send:tweet", {
     tweet: tweet
   })
-
-  return callback(tweet);
+  callback();
 }
 
 function sendTweet(message, callback) {
+  currentTweet = "";
   lastTweet = message;
   postTweet(message, callback);
 }
@@ -218,3 +234,33 @@ function getFriends(callback) {
     callback(data);
   })
 }
+
+// Control board pins and stuff
+var Galileo = require("galileo-io");
+var board = new Galileo();
+
+var rgbPins = {
+  red: 3,
+  green: 5,
+  blue: 6
+};
+board.on("ready", function() {
+  this.pinMode(rgbPins.red, this.MODES.OUTPUT);
+  this.pinMode(rgbPins.green, this.MODES.OUTPUT);
+  this.pinMode(rgbPins.blue, this.MODES.OUTPUT);
+});
+
+function setRgbColor(r,g,b) {
+  board.analogWrite(rgbPins.red, 255-r);
+  board.analogWrite(rgbPins.green, 255-b);
+  board.analogWrite(rgbPins.blue, 255-g);
+}
+
+// Read the button on digitalpin 2
+board.digitalRead(2, function(data) {
+  if(data === 1 && currentTweet.length > 0 ) {
+    sendTweet(currentTweet, function(resp) {
+      console.log(resp);
+    })
+  }
+});
