@@ -17,19 +17,28 @@ Skip this step if your board do not have Internet.
 ```
 
 ### If you have an Intel Galileo board
-1. Make all the wiring needed.
-2. If your board have Internet connection, edit line 40 to the IP of your board:
+First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
+
+**If your board have Internet connection**
+
+1. Edit line 40 to the IP of your board:
 ```javascript
 var callbackUrl = "http://YOUR.IP"
 ```
-3. Run with:
+2. Run with:
 ```bash
 node app.js
 ```
-3. If your board do not have Internet, run:
+3. Go to http://THE.BOARD.IP:2222
+
+**If your board do not have Internet**
+
+1. Run:
 ```bash
 node app_nointernet.js
 ```
+2. Go to http://THE.BOARD.IP:2222
+
 ### If you don't have an Intel Galileo board
 1. Go to /web/js/controllers/StartCtrl.js and make this edit:
 ```javascript
@@ -44,7 +53,7 @@ node app_withoutboard.js
 A lot of dependencies, checkout package.json and bower.json
 
 # More information
-For more information about the project and more detailed information about wiring and stuff, checkout[positweet.kspri.se](positweet.kspri.se)
+For more information about the project and more detailed information about wiring and stuff, checkout [positweet.kspri.se](positweet.kspri.se)
 
 # Credits
 Created by Johan Kasperi, Holly Brown and Aileen Bai.
