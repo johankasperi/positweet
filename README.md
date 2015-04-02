@@ -22,31 +22,31 @@ First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
 
 **If your board have Internet connection**
 
-1 Edit line 40 to the IP of your board:
+Edit line 40 to the IP of your board:
 ```javascript
 var callbackUrl = "http://YOUR.IP"
 ```
-2 Run with:
+Run with:
 ```bash
 node app.js
 ```
-3 Go to http://THE.BOARD.IP:2222
+Go to http://THE.BOARD.IP:2222
 
 **If your board do not have Internet**
 
-1 Run:
+Run:
 ```bash
 node app_nointernet.js
 ```
-2 Go to http://THE.BOARD.IP:2222
+Go to http://THE.BOARD.IP:2222
 
 ### If you don't have an Intel Galileo board
 
-1. Go to /web/js/controllers/StartCtrl.js and make this edit:
+Go to /web/js/controllers/StartCtrl.js and make this edit:
 ```javascript
 this.colorPicker = true;
 ```
-2. Run app with:
+Run app with:
 ```bash
 node app_withoutboard.js
 ```
