@@ -4,8 +4,9 @@ Repo for project 1 in INFO490 at UIUC. This project makes it possible to easily 
 # Create Twitter app
 Skip this step if your board do not have Internet.
 
-1. First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](apps.twitter.com) and follow the instructions.
-2. When you have an Twitter app, create the json-file /secret/twitterkeys.json with the following structure:
+First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](apps.twitter.com) and follow the instructions.
+
+When you have an Twitter app, create the json-file /secret/twitterkeys.json with the following structure:
 ```json
 {
   "consumerKey": "Your consumerkey from Twitter",
