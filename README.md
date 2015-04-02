@@ -1,8 +1,7 @@
 # Positweet
 Repo for project 1 in INFO490 at UIUC. This project makes it possible to easily spread some positive tweets to your friends. It uses the Intel Galileo Gen 2 together with a color sensor. The color sensor detects a color of an object, the server then generates a random tweet within the associated feeling for that color, and after pressing the connected button the tweet is sent.
 
-# Run instructions
-### Create Twitter app
+# Create Twitter app
 Skip this step if your board do not have Internet.
 
 1. First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](apps.twitter.com) and follow the instructions.
@@ -14,7 +13,9 @@ Skip this step if your board do not have Internet.
   "accessToken": "",
   "accessTokenSecret": ""
 }
-``
+```
+
+# Run instructions
 
 ### If you have an Intel Galileo board
 First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
@@ -25,12 +26,10 @@ First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
 ```javascript
 var callbackUrl = "http://YOUR.IP"
 ```
-
 2. Run with:
 ```bash
 node app.js
 ```
-
 3. Go to http://THE.BOARD.IP:2222
 
 **If your board do not have Internet**
@@ -39,7 +38,6 @@ node app.js
 ```bash
 node app_nointernet.js
 ```
-
 2. Go to http://THE.BOARD.IP:2222
 
 ### If you don't have an Intel Galileo board
@@ -48,11 +46,10 @@ node app_nointernet.js
 ```javascript
 this.colorPicker = true;
 ``
-
 2. Run app with:
 ```bash
 node app_withoutboard.js
-``
+```
 
 # Dependencies
 A lot of dependencies, checkout package.json and bower.json
