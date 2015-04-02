@@ -14,7 +14,7 @@ Skip this step if your board do not have Internet.
   "accessToken": "",
   "accessTokenSecret": ""
 }
-``
+```
 
 ### If you have an Intel Galileo board
 1. Make all the wiring needed.
