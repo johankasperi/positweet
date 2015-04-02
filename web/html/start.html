@@ -1,10 +1,23 @@
 <div class="container">
-	<div class="row">
-		<h2>Tweet: {{ startCtrl.lastTweet }}</p>
-	</div>
-	<div class="row">
-		<h4>Pick a color:</h4>
-		<input colorpicker="rgb" type="text" ng-model="rgbPicker.color" ng-change="startCtrl.findTweet(rgbPicker.color)" class="form-control" />
-		<button ng-click="startCtrl.sendTweet()" class="btn btn-big btn-primary">Send tweet</button>
-	</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table">
+        <div class="table-cell" resize>
+        <div class="heading align-center">
+			    <div class="heading-label">Tweet:</div>
+			    <div class="heading-message" ng-show="startCtrl.tweetCheck()">{{ startCtrl.currentTweet }}</div>
+          <div class="heading-error" ng-hide="startCtrl.tweetCheck()">{{ startCtrl.errorMessage }}</div>
+		    </div>
+        <div class="heading align-center" ng-show="startCtrl.tweetSent">
+          <div class="heading-error">Tweet sent!</div>
+        </div>
+        <div ng-show="startCtrl.colorPicker">
+      		<h4>Pick a color:</h4>
+      		<input colorpicker="rgb" type="text" ng-model="rgbPicker.color" ng-change="startCtrl.findTweet(rgbPicker.color)" class="form-control" />
+      		<button ng-click="startCtrl.sendTweet()" class="btn btn-big">Send tweet</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,22 +1,37 @@
-<div class="container">
+<div class="container receiver">
 	<div class="row">
-		<h2>Current receiver: {{ '@' + receiverCtrl.receiver }}</p>
+		<div class="col-md-12">
+			<div class="heading">
+				<div class="heading-label">Current:</div>
+				<div class="heading-message" ng-show="receiverCtrl.receiver.length > 0">{{ '@' + receiverCtrl.receiver }}</div>
+				<div class="heading-error" ng-show="receiverCtrl.receiver.length === 0">No receiver set.</div>
+			</div>
+		</div>
 	</div>
-	<div class="row">
-		<input type="text" class="form-control" placeholder="Search" ng-model="search.screen_name" />
+	<div class="row receiver-search">
+		<div class="col-md-4">
+			<input type="text" class="form-control" placeholder="Search" ng-model="search.screen_name" />
+		</div>
 	</div>
-	<div class="row thumbnail-row">
+	<div class="row thumbnail-row" ng-show="receiverCtrl.friends !== null">
 	  <div class="thumbnail-wrap" ng-repeat="friend in receiverCtrl.friends.users | filter:search">
-	    <div class="thumbnail" ng-class="friend.screen_name === receiverCtrl.receiver ? 'current' : ''">
-	      <img ng-src="{{ friend.profile_image_url }}" alt="{{'@' + friend.screen_name }}" />
+	    <div class="col-xs-6 col-sm-3">
+	      <div class="thumbnail" ng-class="friend.screen_name === receiverCtrl.receiver ? 'current' : ''">
+	      <img ng-src="{{ friend.profile_image_url }}" alt="{{'@' + friend.screen_name }}" class="img-circle"/>
 	      <div class="caption">
-	        <h3>{{'@' + friend.screen_name }}</h3>
+	        <h5 class="align-center">{{'@' + friend.screen_name }}</h5>
 	        <p>
 	        	<a href="https://twitter.com/{{friend.screen_name}}" target="_blank" title="{{'@' + friend.screen_name }}" class="btn btn-default">View</a>
-	        	<button class="btn btn-primary" ng-click="receiverCtrl.setReceiver(friend.screen_name)">Set receiver</button> 
+	        	<button class="btn btn-default" ng-click="receiverCtrl.setReceiver(friend.screen_name)">Set receiver</button> 
 	        </p>
 	      </div>
+	      </div>
 	    </div>
-	  </div>
+	    </div>
+	</div>
+	<div class="row" ng-show="receiverCtrl.friends.users.length == null">
+		<div class="col-md-12 align-center">
+			<div class="loader">Loading...</div>
+		</div>
 	</div>
 </div>

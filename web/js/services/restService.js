@@ -51,13 +51,33 @@
   }
 
   restService.prototype.sendTweet = function() {
-    console.log("hej")
     this.http.post('/api/tweet/send', {})
     .error(function(data, status, headers, config) {
     })
     .success(function(data, status, headers, config) {
     });
   }
+
+  restService.prototype.getLastTweet = function(callback) {
+    this.http.get('/api/tweet/last')
+    .error(function(data, status, headers, config) {
+      return callback(null);
+    })
+    .success(function(data, status, headers, config) {
+      return callback(data);
+    });
+  }
+
+  restService.prototype.getCurrentTweet = function(callback) {
+    this.http.get('/api/tweet/current')
+    .error(function(data, status, headers, config) {
+      return callback(null);
+    })
+    .success(function(data, status, headers, config) {
+      return callback(data);
+    });
+  }
+
 
   theBox.service('restService', restService);
 }());

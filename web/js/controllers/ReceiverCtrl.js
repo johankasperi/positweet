@@ -3,13 +3,16 @@
 	var ReceiverCtrl = function(userService, restService) {
 		this.userService = userService;
 		this.restService = restService;
-		this.friends = {};
+		this.friends = null;
 		this.receiver = "";
 		this.init();
 	};
 
 	ReceiverCtrl.prototype.init = function() {
-		this.friends = this.userService.getFriends();
+		var self = this;
+		this.userService.getFriends(function(friends) {
+			self.friends = friends;
+		});
 		this.getReceiver();
 	}
 

@@ -4,19 +4,46 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Please login | The box</title>
+  <title>Positweet</title>
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Montserrat:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
-
+  
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+  <header>
+    <nav id="navigation" role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+       <div class="navbar-header">
+        <a class="navbar-brand" href="/#/">Positweet</a>
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
   <main class="main-body">
-  	<h1>The box</h1>
-  	<p>The box requires that you are logged in to twitter.</p>
-  	<a href="/auth/twitter" title="Login to Twitter" class="btn btn-big btn-primary">Login to Twitter</a>
+    <div class="container">
+      <div class="row max-height">
+        <div class="col-md-12">
+          <div class="table">
+            <div class="table-cell full-height align-center">
+            <a href="/auth/twitter" title="Login to Twitter" class="btn btn-lg btn-primary">Login to Twitter</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
+  <script>
+    $(".full-height").height($(window).height());
+    $(window).resize(function() {
+      $(".full-height").height($(window).height());
+    });
+  </script>
 </body>
 </html>

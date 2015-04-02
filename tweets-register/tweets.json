@@ -2,38 +2,124 @@
 	"register": [
 		{
 			"name": "red",
-			"color": {
+			"colorOut": {
 				"r": 255,
 				"g": 0,
 				"b": 0
 			},
+			"colorIn": {
+				"r": 158,
+				"g": 53,
+				"b": 43
+			},
 			"tweets": [
 				"#receiver# is the best person in the world!",
-				"I just love #receiver#"
+				"I just love #receiver#",
+				"#receiver# is the love of my life"
 			]
 		},
 		{
 			"name": "blue",
-			"color": {
+			"colorOut": {
 				"r": 0,
 				"g": 0,
 				"b": 255
 			},
+			"colorIn": {
+				"r": 42,
+				"g": 91,
+				"b": 110
+			},
 			"tweets": [
-				"#receiver# makes me happy",
-				"#receiver# is the best person I know"
+				"I miss #receiver#",
+				"I want to be with #receiver# now"
 			]
 		},
 		{
 			"name": "green",
-			"color": {
+			"colorOut": {
 				"r": 0,
 				"g": 255,
 				"b": 0
 			},
+			"colorIn": {
+				"r": 62,
+				"g": 124,
+				"b": 57
+			},
 			"tweets": [
-				"#receiver# are wonderful",
-				"#receiver# is sweet"
+				"#receiver# are so funny",
+				"#receiver# has a great sense of humor",
+				"#receiver# makes me laugh",
+				"#receiver# has the best jokes",
+				"No one is funnier than #receiver#"
+			]
+		},
+		{
+			"name": "orange",
+			"colorOut": {
+				"r": 255,
+				"g": 128,
+				"b": 0
+			},
+			"colorIn": {
+				"r": 161,
+				"g": 84,
+				"b": 32
+			},
+			"tweets": [
+				"I like #receiver#",
+				"#receiver# is the one that I like the most"
+			]
+		},
+		{
+			"name": "brown",
+			"colorOut": {
+				"r": 102,
+				"g": 51,
+				"b": 0
+			},
+			"colorIn": {
+				"r": 108,
+				"g": 40,
+				"b": 32
+			},
+			"tweets": [
+				"#receiver# is my best friend",
+				"#receiver# and I are bffs"
+			]
+		},
+		{
+			"name": "pink",
+			"colorIn": {
+				"r": 255,
+				"g": 102,
+				"b": 255
+			},
+			"colorOut": {
+				"r": 108,
+				"g": 60,
+				"b": 107
+			},
+			"tweets": [
+				"#receiver# is cute",
+				"The cutest person is #receiver#"
+			]
+		},
+		{
+			"name": "yellow",
+			"colorIn": {
+				"r": 255,
+				"g": 255,
+				"b": 0
+			},
+			"colorOut": {
+				"r": 106,
+				"g": 107,
+				"b": 40
+			},
+			"tweets": [
+				"#receiver# is unique"
 			]
 		}
 	]

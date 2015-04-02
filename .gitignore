@@ -27,3 +27,8 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 .DS_Store
+
+# Other
+secret
+sftp-config.json
+web/bower_components

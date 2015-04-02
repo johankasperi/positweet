@@ -1,14 +1,12 @@
 var Twit = require('twit'),
-passport = require('passport'),
 express = require('express'),
 session = require('express-session'),
 bodyParser = require('body-parser'),
 socketio = require('socket.io'),
 _ = require('underscore'),
 fs = require('fs'),
-mraa = require('mraa'),
 Galileo = require("galileo-io"),
-TwitterStrategy = require('passport-twitter').Strategy;
+mraa = require('mraa');
 
 // App
 var app = express();
@@ -18,8 +16,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -37,91 +33,25 @@ var receiver = "";
 var lastTweet = ""; // last sended tweet
 var currentTweet = ""; // current random tweet message
 var previousClear = null; // store clear to check if object has been put infront of sensor
-var callbackUrl = "http://192.168.10.104" // the callback url after logging in to twitter
-
-var twitterKeys = {};
-fs.readFile('secret/twitterkeys.json', function(err, data) {
-  if (err) throw err;
-  twitterKeys = JSON.parse(data);
-  initPassport()
-})
-
-// Passport.js for login with Twitter
-function initPassport() {
-  passport.use(new TwitterStrategy({
-    consumerKey: twitterKeys.consumerKey,
-    consumerSecret: twitterKeys.consumerSecret,
-    callbackURL: callbackUrl+":2222/auth/twitter/callback"
-  },
-    function(token, tokenSecret, profile, done) {
-      twitterKeys.accessToken = token;
-      twitterKeys.accessTokenSecret = tokenSecret;
-      T = new Twit({
-        consumer_key: twitterKeys.consumerKey,
-        consumer_secret: twitterKeys.consumerSecret,
-        access_token: twitterKeys.accessToken,
-        access_token_secret: twitterKeys.accessTokenSecret
-      });
-      user = profile;
-      done(null,profile.id);
-    }
-  ));
-}
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
-// Middleware to check if user is loggedin
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
-
-// Routes
-app.get('/auth/twitter', passport.authenticate('twitter'));
-
-app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
-
-app.get('/login', function(req, res) {
-  // Static file for login
-  res.sendFile("login.html", { root: __dirname + "/web" })
-})
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/login');
-});
 
 // Static content
-app.all("/", ensureAuthenticated, function(req, res) {
+app.all("/", function(req, res) {
   res.sendFile("index.html", { root: __dirname + "/web" });
 });
 
 // Rest api
 app.get("/api/user", function(req, res) {
-  if(!req.isAuthenticated()) {
+  if(!user) {
     res.status(400);
-    return res.send();
+    res.send();
   }
   res.status(200),
   res.send(user);
 })
 
 app.get("/api/friends", function(req, res) {
-  getFriends(function(data) {
-    if(!data) {
-      res.status(400);
-      return res.send();
-    }
-    friends = data;
-    res.status(200);
-    res.send(friends);
-  })
+  res.status(400);
+  return res.send();
 })
 
 app.post("/api/receiver", function(req, res) {
@@ -206,12 +136,13 @@ var server = app.listen(process.env.PORT || 2222, function () {
 var io = socketio.listen(server);
 
 // Vector functions
+
 function correctColors(r,g,b,clear) {
   total = r+g+b;
   r /= clear;
   g /= clear;
   b /= clear;
-  return {r: r, g: g, b: b};
+  return [r,g,b];
 }
 
 function vectorNorm(r,g,b) {
@@ -293,12 +224,12 @@ function sendTweet(message, callback) {
 
 // Talk to Twitter API
 function postTweet(message, callback) {
-  T.post('statuses/update', { status: message }, function(err, data, response) {
+  /*T.post('statuses/update', { status: message }, function(err, data, response) {
     if(err)
       return callback(err)
     callback(response)
     console.log(data)
-  })
+  })*/
   io.emit("send:tweetSent", {})
   callback("Sended tweet: "+message)
 }
@@ -328,8 +259,8 @@ board.on("ready", function() {
 
 function setRgbColor(r,g,b) {
   board.analogWrite(rgbPins.red, 255-r);
-  board.analogWrite(rgbPins.green, 255-b);
-  board.analogWrite(rgbPins.blue, 255-g);
+  board.analogWrite(rgbPins.green, 255-g);
+  board.analogWrite(rgbPins.blue, 255-b);
 }
 
 // Read the button on digitalpin 2
@@ -348,3 +279,5 @@ board.digitalRead(2, function(data) { // maybe change this to johnny five.
     numOnes = 0;
   }
 });
+
+

@@ -6,8 +6,6 @@ bodyParser = require('body-parser'),
 socketio = require('socket.io'),
 _ = require('underscore'),
 fs = require('fs'),
-mraa = require('mraa'),
-Galileo = require("galileo-io"),
 TwitterStrategy = require('passport-twitter').Strategy;
 
 // App
@@ -16,7 +14,8 @@ app.use(session({
     secret: "positweet",
     name: "positweet",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge : 604800000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,7 +36,7 @@ var receiver = "";
 var lastTweet = ""; // last sended tweet
 var currentTweet = ""; // current random tweet message
 var previousClear = null; // store clear to check if object has been put infront of sensor
-var callbackUrl = "http://192.168.10.104" // the callback url after logging in to twitter
+var callbackUrl = "http://localhost" // the callback url after logging in to twitter
 
 var twitterKeys = {};
 fs.readFile('secret/twitterkeys.json', function(err, data) {
@@ -67,6 +66,7 @@ function initPassport() {
     }
   ));
 }
+
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -206,6 +206,7 @@ var server = app.listen(process.env.PORT || 2222, function () {
 var io = socketio.listen(server);
 
 // Vector functions
+
 function correctColors(r,g,b,clear) {
   total = r+g+b;
   r /= clear;
@@ -246,7 +247,6 @@ fs.readFile('tweets-register/tweets.json', function(err, data) {
 function checkIfObjInfront(r, g, b, clear, callback) {
   if(previousClear === null) {
     previousClear = clear;
-    setRgbColor(0,0,0);
     return callback(false);
   }
 
@@ -256,7 +256,6 @@ function checkIfObjInfront(r, g, b, clear, callback) {
     return callback(false);
   }
   else if(relation < 0.4) {
-    setRgbColor(0,0,0);
     previousClear = clear;
     return callback(false);
   }
@@ -269,8 +268,6 @@ function findAndPrepareTweet(r, g, b, callback) {
   var foundColor = _.max(tweets.register, function(item) {
     return vectorCompare(r,g,b,item.colorIn.r,item.colorIn.g,item.colorIn.b);
   })
-
-  setRgbColor(foundColor.colorOut.r,foundColor.colorOut.g,foundColor.colorOut.b); // set the color of the led
 
   var tweet = _.sample(foundColor.tweets);
   tweet = tweet.replace("#receiver#", "@"+receiver) + " #INFO490 #UIUC";
@@ -306,45 +303,9 @@ function postTweet(message, callback) {
 function getFriends(callback) {
   T.get('friends/list', { user_id: user._json.id, count: 200 },  function (err, data, response) {
     if(err) {
+      console.log(err);
       return callback(null);
     }
     callback(data);
   })
 }
-
-// Control board pins and stuff
-var board = new Galileo();
-
-var rgbPins = {
-  red: 3,
-  green: 5,
-  blue: 6
-};
-board.on("ready", function() {
-  this.pinMode(rgbPins.red, this.MODES.OUTPUT);
-  this.pinMode(rgbPins.green, this.MODES.OUTPUT);
-  this.pinMode(rgbPins.blue, this.MODES.OUTPUT);
-});
-
-function setRgbColor(r,g,b) {
-  board.analogWrite(rgbPins.red, 255-r);
-  board.analogWrite(rgbPins.green, 255-b);
-  board.analogWrite(rgbPins.blue, 255-g);
-}
-
-// Read the button on digitalpin 2
-var numOnes = 0;
-board.digitalRead(2, function(data) { // maybe change this to johnny five.
-  if(data === 1 && currentTweet.length > 0 ) {
-    numOnes++
-    if(numOnes === 100) {
-      numOnes = 0;
-      sendTweet(currentTweet, function(resp) {
-        console.log(resp);
-      })
-    }
-  }
-  else {
-    numOnes = 0;
-  }
-});

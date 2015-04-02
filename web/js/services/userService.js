@@ -3,7 +3,7 @@
 	var userService = function(restService) {
 		this.restService = restService;
 		this.user = {};
-		this.friends = {};
+		this.friends = null;
 	};
 
 	userService.prototype.loadUser = function(callback) {
@@ -20,18 +20,18 @@
 		return this.user;
 	}
 
-	userService.prototype.loadFriends = function(callback) {
+	userService.prototype.getFriends = function(callback) {
 		var self = this;
+		if(self.friends) {
+			console.log("finns");
+			return callback(self.friends);
+		}
 		self.restService.getFriends(function(friends) {
 			if(friends) {
 				self.friends = friends;
-				return callback();
+				return callback(self.friends);
 			}
 		});
-	}
-
-	userService.prototype.getFriends = function() {
-		return this.friends;
 	}
 
 	theBox.service('userService', userService);
