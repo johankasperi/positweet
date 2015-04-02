@@ -4,7 +4,7 @@ Repo for project 1 in INFO490 at UIUC. This project makes it possible to easily 
 ## Create Twitter app
 Skip this step if your board do not have Internet.
 
-First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](apps.twitter.com) and follow the instructions.
+First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](http://apps.twitter.com) and follow the instructions.
 
 When you have an Twitter app, create the json-file /secret/twitterkeys.json with the following structure:
 ```json
@@ -19,7 +19,7 @@ When you have an Twitter app, create the json-file /secret/twitterkeys.json with
 ## Run instructions
 
 ### If you have an Intel Galileo board
-First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
+First make all the wiring needed, see [positweet.kspri.se](http://positweet.kspri.se)
 
 When the wiring is done, run /arduino/theBoxColorSensor.ino from the Arduino IDE.
 
@@ -49,7 +49,7 @@ node app_withoutboard.js
 A lot of dependencies, checkout package.json and bower.json
 
 ## More information
-For more information about the project and more detailed information about wiring and stuff, checkout [positweet.kspri.se](positweet.kspri.se)
+For more information about the project and more detailed information about wiring and stuff, checkout [positweet.kspri.se](http://positweet.kspri.se)
 
 ## Credits
 Created by Johan Kasperi, Holly Brown and Aileen Bai.
