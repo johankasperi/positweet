@@ -23,27 +23,18 @@ First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
 
 When the wiring is done, run /arduino/theBoxColorSensor.ino from the Arduino IDE.
 
-**If your board have Internet connection**
-
 Edit line 40 to the IP of your board:
 ```javascript
 var callbackUrl = "http://YOUR.IP"
 ```
-Run with:
+SSH to your Galileo and run with:
 ```bash
 node app.js
 ```
 Go to http://THE.BOARD.IP:2222
 
-**If your board do not have Internet**
-
-Run:
-```bash
-node app_nointernet.js
-```
-Go to http://THE.BOARD.IP:2222
-
 ### If you don't have an Intel Galileo board
+The repo comes with a version that don't require a Intel Galileo. You can run this app on your computer. Instead of generating tweets from objects infront of a color sensor, a color picker is shown in the web interface for manual interaction.
 
 Go to /web/js/controllers/StartCtrl.js and make this edit:
 ```javascript
@@ -57,7 +48,7 @@ node app_withoutboard.js
 ## Dependencies
 A lot of dependencies, checkout package.json and bower.json
 
-# More information
+## More information
 For more information about the project and more detailed information about wiring and stuff, checkout [positweet.kspri.se](positweet.kspri.se)
 
 ## Credits
