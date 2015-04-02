@@ -21,6 +21,8 @@ When you have an Twitter app, create the json-file /secret/twitterkeys.json with
 ### If you have an Intel Galileo board
 First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
 
+When the wiring is done, run /arduino/theBoxColorSensor.ino from the Arduino IDE.
+
 **If your board have Internet connection**
 
 Edit line 40 to the IP of your board:
