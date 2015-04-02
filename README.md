@@ -14,7 +14,7 @@ Skip this step if your board do not have Internet.
   "accessToken": "",
   "accessTokenSecret": ""
 }
-```
+``
 
 ### If you have an Intel Galileo board
 First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
@@ -25,10 +25,12 @@ First make all the wiring needed, see [positweet.kspri.se](positweet.kspri.se)
 ```javascript
 var callbackUrl = "http://YOUR.IP"
 ```
+
 2. Run with:
 ```bash
 node app.js
 ```
+
 3. Go to http://THE.BOARD.IP:2222
 
 **If your board do not have Internet**
@@ -37,13 +39,16 @@ node app.js
 ```bash
 node app_nointernet.js
 ```
+
 2. Go to http://THE.BOARD.IP:2222
 
 ### If you don't have an Intel Galileo board
+
 1. Go to /web/js/controllers/StartCtrl.js and make this edit:
 ```javascript
 this.colorPicker = true;
 ``
+
 2. Run app with:
 ```bash
 node app_withoutboard.js
