@@ -5,7 +5,7 @@
 		this.restService = restService;
 		this.currentTweet = "";
 		this.tweetSent = false;
-		this.colorPicker = true; // decides of colorpicker should be shown or not.
+		this.colorPicker = false; // decides of colorpicker should be shown or not.
 
 		var self = this;
 		self.socketService.on('send:tweet', function (message) {

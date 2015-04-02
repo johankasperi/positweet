@@ -6,26 +6,38 @@ Repo for project 1 in INFO490 at UIUC. This project makes it possible to easily 
 Skip this step if your board do not have Internet.
 1. First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](apps.twitter.com) and follow the instructions.
 2. When you have an Twitter app, create the json-file /secret/twitterkeys.json with the following structure:
-({
+```json
+{
   "consumerKey": "Your consumerkey from Twitter",
   "consumerSecret": "Your consumersecret from Twitter",
   "accessToken": "",
   "accessTokenSecret": ""
-})
+}
+```
 
 ## If you have an Intel Galileo board
 1. Make all the wiring needed.
 2. If your board have Internet connection, edit line 40 to the IP of your board:
-(var callbackUrl = "http://YOUR.IP")
+```javascript
+var callbackUrl = "http://YOUR.IP"
+```
 3. Run with:
-(node app.js)
+```bash
+node app.js
+```
 3. If your board do not have Internet, run:
-(node app_nointernet.js)
+```bash
+node app_nointernet.js
+```
 ## If you don't have an Intel Galileo board
 1. Go to /web/js/controllers/StartCtrl.js and make this edit:
-(this.colorPicker = true;)
+```javascript
+this.colorPicker = true;
+``
 2. Run app with:
-(node app_withoutboard.js)
+```bash
+node app_withoutboard.js
+``
 
 # Dependencies
 A lot of dependencies, checkout package.json and bower.json
