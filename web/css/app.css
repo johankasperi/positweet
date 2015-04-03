@@ -3,7 +3,7 @@ html {
 }
 body {
 	background-color: #EFAB1E;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 }
 
 .table {
@@ -48,7 +48,7 @@ body {
 	float: left;
 }
 .navbar-default .navbar-brand {
-	font-family: "Permanent marker";
+	font-family: "Quicksand";
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -141,7 +141,7 @@ body {
 	border: 1px solid transparent;
 }
 .btn-lg {
-	border: 3px solid transparent;
+	border: 2px solid transparent;
 }
 .btn-group-lg>.btn, .btn-lg {
 	font-size: 22px;
@@ -154,7 +154,6 @@ body {
 	border-color: #fff;
 	background-color: #fff;
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
 	border-color: #fff;
@@ -189,6 +188,7 @@ input.form-control {
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	color: #FFF;
+	font-weight: bold;
 }
 .heading-message {
 	background-color: #fff;
@@ -217,6 +217,9 @@ input.form-control {
 .thumbnail img {
 	max-height: 48px;
     margin-top:20px;
+}
+.thumbnail .btn {
+	margin: 5px 0;
 }
 
 /**
