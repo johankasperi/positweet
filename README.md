@@ -2,7 +2,6 @@
 Repo for project 1 in INFO490 at UIUC. This project makes it possible to easily spread some positive tweets to your friends. It uses the Intel Galileo Gen 2 together with a color sensor. The color sensor detects a color of an object, the server then generates a random tweet within the associated feeling for that color, and after pressing the connected button the tweet is sent.
 
 ## Create Twitter app
-Skip this step if your board do not have Internet.
 
 First you have to create a Twitter app that allows the app to post tweets and read the authenticated users friends list. Go to [apps.twitter.com](http://apps.twitter.com) and follow the instructions.
 
