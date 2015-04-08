@@ -13,8 +13,8 @@ TwitterStrategy = require('passport-twitter').Strategy;
 // App
 var app = express();
 app.use(session({
-    secret: "positweet",
-    name: "positweet",
+    secret: "positweet-2",
+    name: "positweet-2",
     resave: true,
     saveUninitialized: true
 }));
@@ -37,7 +37,7 @@ var receiver = "";
 var lastTweet = ""; // last sended tweet
 var currentTweet = ""; // current random tweet message
 var previousClear = null; // store clear to check if object has been put infront of sensor
-var callbackUrl = "http://192.168.10.104" // the callback url after logging in to twitter
+var callbackUrl = "http://141.142.20.223" // the callback url after logging in to twitter
 
 var twitterKeys = {};
 fs.readFile('secret/twitterkeys.json', function(err, data) {
@@ -251,11 +251,11 @@ function checkIfObjInfront(r, g, b, clear, callback) {
   }
 
   var relation = clear/previousClear;
-  if(relation < 1.6 && relation > 0.4) {
+  if(relation < 1.1 && relation > 0.9) {
     previousClear = clear;
     return callback(false);
   }
-  else if(relation < 0.4) {
+  else if(relation < 0.9) {
     setRgbColor(0,0,0);
     previousClear = clear;
     return callback(false);

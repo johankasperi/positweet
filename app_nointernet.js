@@ -29,7 +29,7 @@ app.use("/bower_components", express.static(__dirname + "/web/bower_components")
 var T;
 var user;
 var friends = {};
-var receiver = "";
+var receiver = "johannahilding";
 var lastTweet = ""; // last sended tweet
 var currentTweet = ""; // current random tweet message
 var previousClear = null; // store clear to check if object has been put infront of sensor
@@ -72,18 +72,10 @@ app.get("/api/receiver", function(req, res) {
 
 app.get("/api/tweet/find", function(req, res) {
 
-  if(receiver.length === 0) {
-    io.emit("send:noReceiver", {});
-    res.status(200);
-    res.send();
-    return null
-  }
-
   var r = parseInt(req.query.red);
   var g = parseInt(req.query.green);
   var b = parseInt(req.query.blue);
   var clear = parseInt(req.query.clear);
-
   checkIfObjInfront(r,g,b,clear, function(objInfront) {
     if(!objInfront) {
       res.status(200);
@@ -182,11 +174,11 @@ function checkIfObjInfront(r, g, b, clear, callback) {
   }
 
   var relation = clear/previousClear;
-  if(relation < 1.6 && relation > 0.4) {
+  if(relation < 1.1 && relation > 0.9) {
     previousClear = clear;
     return callback(false);
   }
-  else if(relation < 0.4) {
+  else if(relation < 0.9) {
     setRgbColor(0,0,0);
     previousClear = clear;
     return callback(false);
@@ -200,7 +192,6 @@ function findAndPrepareTweet(r, g, b, callback) {
   var foundColor = _.max(tweets.register, function(item) {
     return vectorCompare(r,g,b,item.colorIn.r,item.colorIn.g,item.colorIn.b);
   })
-
   setRgbColor(foundColor.colorOut.r,foundColor.colorOut.g,foundColor.colorOut.b); // set the color of the led
 
   var tweet = _.sample(foundColor.tweets);
